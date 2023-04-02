@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Appointment;
+use App\Models\DoctorSchedule;
 use App\Models\Gallary;
 use App\Models\Specialization;
 use Illuminate\Support\Facades\Auth;
@@ -15,6 +17,9 @@ class AdminController extends Controller
         return view('admin.pages.dashboard'
         ,[
         'specialites' => Specialization::all(),
+        'doctorschedules'=> DoctorSchedule::where('doctor_id',Auth::user()->id)->count(),
+        'appointmentes'=> Appointment::count(),
+
         ]
 
 );

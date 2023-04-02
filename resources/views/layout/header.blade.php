@@ -10,13 +10,11 @@
                     </span>
                 </a>
                 <a href="/" class="navbar-brand logo home_log">
-                    <img src="{{ asset('assets/img/jj.jpg') }}" class="img-fluid" alt="Logo">
                 </a>
             </div>
             <div class="main-menu-wrapper">
                 <div class="menu-header">
                     <a href="/" class="menu-logo">
-                        <img height="70px" src="{{ asset('assets/img/jj.jpg') }}" class="img-fluid" alt="Logo">
                     </a>
                     <a id="menu_close" class="menu-close" href="javascript:void(0);">
                         <i class="fas fa-times"></i>

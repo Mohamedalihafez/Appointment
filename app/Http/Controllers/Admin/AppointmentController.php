@@ -4,6 +4,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\AppointmentRequest;
 use App\Models\Appointment;
+use Illuminate\Support\Facades\Auth;
 
 class AppointmentController extends Controller
 {
@@ -15,7 +16,7 @@ class AppointmentController extends Controller
     public function index(Request $request)
     {
         return view('admin.pages.appointment.index',[
-            'specialites' => Appointment::filter($request->all())->paginate(10)
+            'specialites' => Appointment::filter($request->all())->where('patient_id' ,Auth::user()->id)->paginate(10)
         ]);
     }
 

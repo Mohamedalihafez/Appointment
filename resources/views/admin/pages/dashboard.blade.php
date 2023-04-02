@@ -13,96 +13,19 @@
 										<i class="fe fe-users"></i>
 									</span>
 									<div class="dash-count">
-										<div class="teachers_count"></div>
+										<div class="teachers_count">{{$appointmentes}}</div>
 									</div>
 								</div>
 								<div class="dash-widget-info">
-									<h6 class="text-muted">{{ __('pages.teachers')}}</h6>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-xl-4 col-sm-6 col-12">
-						<div class="card">
-							<div class="card-body">
-								<div class="dash-widget-header">
-									<span class="dash-widget-icon text-success">
-										<i class="fe fe-users"></i>
-									</span>
-									<div class="dash-count">
-										<div class="preprators_count"></div>
-									</div>
-								</div>
-								<div class="dash-widget-info">
-									
-									<h6 class="text-muted">{{ __('pages.preprators')}}</h6>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-xl-4 col-sm-6 col-12">
-						<div class="card">
-							<div class="card-body">
-								<div class="dash-widget-header">
-									<span class="dash-widget-icon text-danger border-danger">
-										<i class="fe fe-file"></i>
-									</span>
-									<div class="dash-count">
-										<div class="preprations_count"></div>
-									</div>
-								</div>
-								<div class="dash-widget-info">
-									
-									<h6 class="text-muted">{{ __('pages.preprations')}}</h6>
+									<h6 class="text-muted">{{ __('pages.appointments')}}</h6>
 								</div>
 							</div>
 						</div>
 					</div>
 
-				</div>
-				<div class="row">
-					<div class="col-md-6 d-flex">
-						<div class="card card-table flex-fill">
-							<div class="card-header">
-								<h5 class="card-title" style="margin-right: -10px;">{{ __('pages.teacher_list')}}</h5>
-							</div>
-							<div class="card-body">
-								<div class="table-responsive">
-									<table class="table table-hover table-center mb-0">
-										<thead>
-											<tr>
-												<th>{{ __('pages.teacher_name')}}</th>
-											</tr>
-										</thead>
-										<tbody class="teacher_list">
-										</tbody>
-									</table>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-6 d-flex">
-						<div class="card  card-table flex-fill">
-							<div class="card-header">
-								<h5 class="card-title" style="margin-right: -10px;">{{ __('pages.preprators_list')}}</h5>
-							</div>
-							<div class="card-body">
-								<div class="table-responsive">
-									<table class="table table-hover table-center mb-0">
-										<thead>
-											<tr>													
-												<th>{{ __('pages.preprator_name')}}</th>
 
-											</tr>
-										</thead>
-										<tbody class="preprator_list">
-										</tbody>
-									</table>
-								</div>
-							</div>
-						</div>
-					</div>
 				</div>
+
 				@elseif(Auth::user()->role->id == USER)
 				<div class="row">
 					<div class="col-xl-4 col-sm-6 col-12">
@@ -113,50 +36,12 @@
 										<i class="fe fe-file"></i>
 									</span>
 									<div class="dash-count">
-										<div class="">{{Auth::user()->used_request}}</div>
+										<div class="">{{$doctorschedules}}</div>
 									</div>
 								</div>
 								<div class="dash-widget-info">
 									
-									<h6 class="text-muted">{{ __('pages.used_request')}}</h6>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-xl-4 col-sm-6 col-12">
-						<div class="card">
-							<div class="card-body">
-								<div class="dash-widget-header">
-									<span class="dash-widget-icon text-danger border-danger">
-										<i class="fe fe-file"></i>
-									</span>
-									<div class="dash-count">
-										<div class="">{{Auth::user()->max_request}}</div>
-									</div>
-								</div>
-								<div class="dash-widget-info">
-									
-									<h6 class="text-muted">{{ __('pages.max_request')}}</h6>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-12 d-flex">
-						<div class="card card-table flex-fill">
-							<div class="card-header">
-								<h5 class="card-title" style="margin-right: -10px;">{{ __('pages.prepration_list')}}</h5>
-							</div>
-							<div class="card-body">
-								<div class="table-responsive">
-									<table class="table table-hover table-center mb-0">
-										<thead>
-											<tr>
-												<th>{{ __('pages.prepration_name')}}</th>
-											</tr>
-										</thead>
-										<tbody class="prepration_list">
-										</tbody>
-									</table>
+									<h6 class="text-muted">{{ __('pages.doctorschedules')}}</h6>
 								</div>
 							</div>
 						</div>
