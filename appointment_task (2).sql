@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 02, 2023 at 01:31 AM
+-- Generation Time: Apr 02, 2023 at 03:41 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `appointments` (
-  `id` bigint(20) UNSIGNED NOT NULL PRIMARY KEY,
+  `id` bigint(20) UNSIGNED NOT NULL,
   `date` date DEFAULT NULL,
   `startTime` time DEFAULT NULL,
   `endTime` time DEFAULT NULL,
@@ -47,7 +47,10 @@ CREATE TABLE `appointments` (
 INSERT INTO `appointments` (`id`, `date`, `startTime`, `endTime`, `status`, `patient_id`, `doctor_id`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (5, '2023-04-05', '08:00:00', '09:00:00', 'pending', 3, 2, '2023-04-01 20:35:01', '2023-04-01 20:41:39', '2023-04-01 20:41:39'),
 (6, '2023-04-05', '09:00:00', '10:00:00', 'pending', 3, 2, '2023-04-01 20:35:26', '2023-04-01 20:35:26', NULL),
-(7, '2023-04-02', '09:00:00', '10:00:00', 'pending', 3, 2, '2023-04-01 20:41:27', '2023-04-01 20:41:27', NULL);
+(7, '2023-04-02', '09:00:00', '10:00:00', 'pending', 3, 2, '2023-04-01 20:41:27', '2023-04-01 20:41:27', NULL),
+(8, '2023-04-04', '12:00:00', '13:00:00', 'pending', 4, 2, '2023-04-01 22:31:42', '2023-04-01 22:33:36', '2023-04-01 22:33:36'),
+(11, '2023-04-08', '12:00:00', '13:00:00', 'pending', 4, 2, '2023-04-01 22:37:03', '2023-04-01 22:37:26', '2023-04-01 22:37:26'),
+(12, '2023-04-08', '12:00:00', '13:00:00', 'pending', 4, 2, '2023-04-01 22:39:18', '2023-04-01 22:39:47', '2023-04-01 22:39:47');
 
 -- --------------------------------------------------------
 
@@ -56,9 +59,9 @@ INSERT INTO `appointments` (`id`, `date`, `startTime`, `endTime`, `status`, `pat
 --
 
 CREATE TABLE `complaint` (
-  `id` bigint(20) UNSIGNED NOT NULL PRIMARY KEY,
+  `id` bigint(20) UNSIGNED NOT NULL,
   `patient_id` bigint(20) UNSIGNED NOT NULL,
-  `appointment_id` bigint(20) UNSIGNED NOT NULL ,
+  `appointment_id` bigint(20) UNSIGNED NOT NULL,
   `concerns` text DEFAULT NULL,
   `symptoms` text DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -73,7 +76,12 @@ CREATE TABLE `complaint` (
 INSERT INTO `complaint` (`id`, `patient_id`, `appointment_id`, `concerns`, `symptoms`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (5, 3, 5, NULL, NULL, '2023-04-01 20:35:01', '2023-04-01 20:35:01', NULL),
 (6, 3, 6, NULL, NULL, '2023-04-01 20:35:26', '2023-04-01 20:35:26', NULL),
-(7, 3, 7, NULL, NULL, '2023-04-01 20:41:27', '2023-04-01 20:41:27', NULL);
+(7, 3, 7, NULL, NULL, '2023-04-01 20:41:27', '2023-04-01 20:41:27', NULL),
+(8, 4, 8, NULL, NULL, '2023-04-01 22:31:43', '2023-04-01 22:31:43', NULL),
+(9, 4, 9, NULL, NULL, '2023-04-01 22:34:03', '2023-04-01 22:34:03', NULL),
+(10, 4, 10, NULL, NULL, '2023-04-01 22:35:25', '2023-04-01 22:35:25', NULL),
+(11, 4, 11, NULL, NULL, '2023-04-01 22:37:03', '2023-04-01 22:37:03', NULL),
+(12, 4, 12, NULL, NULL, '2023-04-01 22:39:18', '2023-04-01 22:39:18', NULL);
 
 -- --------------------------------------------------------
 
@@ -82,7 +90,7 @@ INSERT INTO `complaint` (`id`, `patient_id`, `appointment_id`, `concerns`, `symp
 --
 
 CREATE TABLE `contacts` (
-  `id` bigint(20) UNSIGNED NOT NULL PRIMARY KEY,,
+  `id` bigint(20) UNSIGNED NOT NULL,
   `name` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
   `phone` varchar(255) DEFAULT NULL,
@@ -93,6 +101,14 @@ CREATE TABLE `contacts` (
   `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `contacts`
+--
+
+INSERT INTO `contacts` (`id`, `name`, `email`, `phone`, `subject`, `comments`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'Mohamed', 'alimomo22@gmail.com', NULL, 'sdads', 'adsadsa', '2023-04-01 22:07:19', '2023-04-01 22:07:19', NULL),
+(2, 'mohamed', 'mohamed@gmail.com', NULL, 'sdads', 'jgfhgfhfhdff', '2023-04-01 22:19:09', '2023-04-01 22:19:09', NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -100,7 +116,7 @@ CREATE TABLE `contacts` (
 --
 
 CREATE TABLE `diagnose` (
-  `id` bigint(20) UNSIGNED NOT NULL PRIMARY KEY,,
+  `id` bigint(20) UNSIGNED NOT NULL,
   `doctor_id` bigint(20) UNSIGNED NOT NULL,
   `appointment_id` bigint(20) UNSIGNED NOT NULL,
   `diagnosis` text DEFAULT NULL,
@@ -116,7 +132,10 @@ CREATE TABLE `diagnose` (
 INSERT INTO `diagnose` (`id`, `doctor_id`, `appointment_id`, `diagnosis`, `prescription`, `created_at`, `updated_at`) VALUES
 (5, 2, 5, NULL, NULL, '2023-04-01 20:35:01', '2023-04-01 20:35:01'),
 (6, 2, 6, NULL, NULL, '2023-04-01 20:35:26', '2023-04-01 20:35:26'),
-(7, 2, 7, NULL, NULL, '2023-04-01 20:41:27', '2023-04-01 20:41:27');
+(7, 2, 7, NULL, NULL, '2023-04-01 20:41:27', '2023-04-01 20:41:27'),
+(8, 2, 8, NULL, NULL, '2023-04-01 22:31:43', '2023-04-01 22:31:43'),
+(11, 2, 11, NULL, NULL, '2023-04-01 22:37:03', '2023-04-01 22:37:03'),
+(12, 2, 12, NULL, NULL, '2023-04-01 22:39:18', '2023-04-01 22:39:18');
 
 -- --------------------------------------------------------
 
@@ -125,7 +144,7 @@ INSERT INTO `diagnose` (`id`, `doctor_id`, `appointment_id`, `diagnosis`, `presc
 --
 
 CREATE TABLE `doctor_schedules` (
-  `id` bigint(20) UNSIGNED NOT NULL PRIMARY KEY,,
+  `id` bigint(20) UNSIGNED NOT NULL,
   `doctor_id` bigint(20) UNSIGNED NOT NULL,
   `schedule_id` bigint(20) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -141,7 +160,7 @@ INSERT INTO `doctor_schedules` (`id`, `doctor_id`, `schedule_id`, `created_at`, 
 (1, 2, 3, '2023-04-01 14:14:23', '2023-04-01 15:22:05', '2023-04-01 15:22:05'),
 (2, 2, 6, '2023-04-01 14:14:23', '2023-04-01 14:14:23', NULL),
 (3, 2, 2, '2023-04-01 15:36:32', '2023-04-01 15:36:32', NULL),
-(4, 2, 7, '2023-04-01 15:36:32', '2023-04-01 15:36:32', NULL);
+(4, 2, 7, '2023-04-01 15:36:32', '2023-04-01 23:21:34', '2023-04-01 23:21:34');
 
 -- --------------------------------------------------------
 
@@ -150,7 +169,7 @@ INSERT INTO `doctor_schedules` (`id`, `doctor_id`, `schedule_id`, `created_at`, 
 --
 
 CREATE TABLE `failed_jobs` (
-  `id` bigint(20) UNSIGNED NOT NULL PRIMARY KEY,,
+  `id` bigint(20) UNSIGNED NOT NULL,
   `uuid` varchar(255) NOT NULL,
   `connection` text NOT NULL,
   `queue` text NOT NULL,
@@ -166,7 +185,7 @@ CREATE TABLE `failed_jobs` (
 --
 
 CREATE TABLE `gallaries` (
-  `id` bigint(20) UNSIGNED NOT NULL PRIMARY KEY,,
+  `id` bigint(20) UNSIGNED NOT NULL,
   `name` varchar(255) DEFAULT NULL,
   `imageable_type` varchar(255) NOT NULL,
   `imageable_id` bigint(20) UNSIGNED NOT NULL,
@@ -181,7 +200,9 @@ CREATE TABLE `gallaries` (
 --
 
 INSERT INTO `gallaries` (`id`, `name`, `imageable_type`, `imageable_id`, `use_for`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'picture_1.png', 'App\\Models\\User', 1, 'picture', '2023-03-31 22:26:17', '2023-03-31 22:26:17', NULL);
+(1, 'picture_1.png', 'App\\Models\\User', 1, 'picture', '2023-03-31 22:26:17', '2023-03-31 22:26:17', NULL),
+(2, 'picture_4.png', 'App\\Models\\User', 4, 'picture', '2023-04-01 22:41:04', '2023-04-01 22:41:04', NULL),
+(3, 'picture_2.png', 'App\\Models\\User', 2, 'picture', '2023-04-01 23:22:02', '2023-04-01 23:22:02', NULL);
 
 -- --------------------------------------------------------
 
@@ -190,7 +211,7 @@ INSERT INTO `gallaries` (`id`, `name`, `imageable_type`, `imageable_id`, `use_fo
 --
 
 CREATE TABLE `migrations` (
-  `id` int(10) UNSIGNED NOT NULL ,
+  `id` int(10) UNSIGNED NOT NULL,
   `migration` varchar(255) NOT NULL,
   `batch` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -369,7 +390,7 @@ CREATE TABLE `personal_access_tokens` (
 --
 
 CREATE TABLE `privileges` (
-  `id` bigint(20) UNSIGNED NOT NULL PRIMARY KEY,,
+  `id` bigint(20) UNSIGNED NOT NULL,
   `name` varchar(255) DEFAULT NULL,
   `constant` varchar(255) DEFAULT NULL,
   `parent_id` bigint(20) UNSIGNED DEFAULT NULL,
@@ -414,7 +435,7 @@ INSERT INTO `privileges` (`id`, `name`, `constant`, `parent_id`, `created_at`, `
 --
 
 CREATE TABLE `privilege_role` (
-  `id` bigint(20) UNSIGNED NOT NULL PRIMARY KEY,,
+  `id` bigint(20) UNSIGNED NOT NULL,
   `privilege_id` bigint(20) UNSIGNED DEFAULT NULL,
   `role_id` bigint(20) UNSIGNED DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -428,7 +449,7 @@ CREATE TABLE `privilege_role` (
 --
 
 CREATE TABLE `roles` (
-  `id` bigint(20) UNSIGNED NOT NULL PRIMARY KEY,,
+  `id` bigint(20) UNSIGNED NOT NULL,
   `name` varchar(255) DEFAULT NULL,
   `all_privileges` tinyint(1) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -452,7 +473,7 @@ INSERT INTO `roles` (`id`, `name`, `all_privileges`, `created_at`, `updated_at`,
 --
 
 CREATE TABLE `schedules` (
-  `id` bigint(20) UNSIGNED NOT NULL PRIMARY KEY,,
+  `id` bigint(20) UNSIGNED NOT NULL,
   `startTime` time DEFAULT NULL,
   `endTime` time DEFAULT NULL,
   `breakTime` time DEFAULT NULL,
@@ -473,7 +494,8 @@ INSERT INTO `schedules` (`id`, `startTime`, `endTime`, `breakTime`, `day`, `crea
 (4, '12:00:00', '21:00:00', '16:00:00', 'الخميس', '2023-04-22 22:27:17', '2023-04-10 22:27:17', NULL),
 (5, '12:00:00', '21:00:00', '16:00:00', 'الجمعه', '2023-04-22 22:27:17', '2023-04-10 22:27:17', NULL),
 (6, '12:00:00', '21:00:00', '16:00:00', 'السبت', '2023-04-22 22:27:17', '2023-04-10 22:27:17', NULL),
-(7, '12:00:00', '21:00:00', '16:00:00', 'الأحد', '2023-04-22 22:27:17', '2023-04-10 22:27:17', NULL);
+(7, '12:00:00', '21:00:00', '16:00:00', 'الأحد', '2023-04-22 22:27:17', '2023-04-10 22:27:17', NULL),
+(8, '07:34:00', '07:34:00', '06:34:00', 'السبت', '2023-04-01 23:34:18', '2023-04-01 23:34:33', '2023-04-01 23:34:33');
 
 -- --------------------------------------------------------
 
@@ -482,7 +504,7 @@ INSERT INTO `schedules` (`id`, `startTime`, `endTime`, `breakTime`, `day`, `crea
 --
 
 CREATE TABLE `specializations` (
-  `id` bigint(20) UNSIGNED NOT NULL PRIMARY KEY,,
+  `id` bigint(20) UNSIGNED NOT NULL,
   `name` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -497,11 +519,12 @@ INSERT INTO `specializations` (`id`, `name`, `created_at`, `updated_at`, `delete
 (1, 'General practice', '2023-03-31 23:03:29', '2023-04-01 17:46:33', NULL),
 (2, 'Pediatrics', '2023-03-31 23:03:48', '2023-03-31 23:03:48', NULL),
 (3, 'Radiology', '2023-03-31 23:03:59', '2023-03-31 23:03:59', NULL),
-(4, 'Ophthalmology', '2023-03-31 23:04:08', '2023-04-01 21:12:19', NULL),
+(4, 'Ophthalmology', '2023-03-31 23:04:08', '2023-04-01 23:40:11', '2023-04-01 23:40:11'),
 (5, 'Sports medicine and rehabilitation', '2023-03-31 23:04:21', '2023-03-31 23:04:21', NULL),
 (6, 'Oncology', '2023-03-31 23:04:33', '2023-03-31 23:04:33', NULL),
 (7, 'Dermatology', '2023-03-31 23:04:42', '2023-03-31 23:04:42', NULL),
-(8, 'Emergency Medicine', '2023-03-31 23:04:54', '2023-03-31 23:04:54', NULL);
+(8, 'Emergency Medicine', '2023-03-31 23:04:54', '2023-03-31 23:04:54', NULL),
+(9, 'mohamed', '2023-04-01 23:31:06', '2023-04-01 23:31:35', '2023-04-01 23:31:35');
 
 -- --------------------------------------------------------
 
@@ -510,7 +533,7 @@ INSERT INTO `specializations` (`id`, `name`, `created_at`, `updated_at`, `delete
 --
 
 CREATE TABLE `users` (
-  `id` bigint(20) UNSIGNED NOT NULL PRIMARY KEY,,
+  `id` bigint(20) UNSIGNED NOT NULL,
   `name` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
   `country_code` int(11) DEFAULT NULL,
@@ -529,9 +552,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `country_code`, `phone`, `mobile_no_verified_at`, `password`, `role_id`, `speciality_id`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'Mohamed Abdelhafez', 'alimomo226@gmail.com', 20, '1026036513', NULL, '$2y$10$gWHx4kKURk/PX0QWeZFeg.gkPWPt/Tj1vW0Gm2U7EXz67vG/3PW.6', 1, NULL, '2023-04-01 13:01:31', '2023-04-01 13:01:31', NULL),
-(2, 'mahmoud', 'mahmoud@gmail.com', 20, '100123213', NULL, '$2y$10$1EUukIIGjkiM4sbJw6dVCep4nq5dFkDWNfkfeB5gfujXufpMAVgti', 2, 4, '2023-04-01 13:15:09', '2023-04-01 13:20:20', NULL),
-(3, 'ahmed', 'ahmed@gmail.com', 20, '100123214', NULL, '$2y$10$1EUukIIGjkiM4sbJw6dVCep4nq5dFkDWNfkfeB5gfujXufpMAVgti', 3, NULL, '2023-04-17 13:15:09', '2023-04-17 13:20:20', NULL);
+(1, 'Mohamed Abdelhafez', 'alimomo226@gmail.com', 20, '1026036514', NULL, '$2y$10$gWHx4kKURk/PX0QWeZFeg.gkPWPt/Tj1vW0Gm2U7EXz67vG/3PW.6', 1, NULL, '2023-04-01 13:01:31', '2023-04-01 13:01:31', NULL),
+(2, 'mahmoud', 'mahmoud@gmail.com', NULL, '100123213', NULL, '$2y$10$1EUukIIGjkiM4sbJw6dVCep4nq5dFkDWNfkfeB5gfujXufpMAVgti', 2, 4, '2023-04-01 13:15:09', '2023-04-01 23:22:01', NULL),
+(3, 'ahmed', 'ahmed@gmail.com', 20, '100123214', NULL, '$2y$10$1EUukIIGjkiM4sbJw6dVCep4nq5dFkDWNfkfeB5gfujXufpMAVgti', 3, NULL, '2023-04-17 13:15:09', '2023-04-17 13:20:20', NULL),
+(4, 'mahmoud', 'mahmoud22@gmail.com', 20, '1026036513', NULL, '$2y$10$oB59Fzv1n/xNqjztXo/bFe0qwzdwst8O6GSNUSfEkd4ReteGV7fr6', 3, NULL, '2023-04-01 22:24:08', '2023-04-01 22:41:03', NULL);
 
 -- --------------------------------------------------------
 
@@ -540,7 +564,7 @@ INSERT INTO `users` (`id`, `name`, `email`, `country_code`, `phone`, `mobile_no_
 --
 
 CREATE TABLE `verifications` (
-  `id` bigint(20) UNSIGNED NOT NULL PRIMARY KEY,,
+  `id` bigint(20) UNSIGNED NOT NULL,
   `phone` varchar(255) DEFAULT NULL,
   `verification_id` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -553,7 +577,7 @@ CREATE TABLE `verifications` (
 --
 
 INSERT INTO `verifications` (`id`, `phone`, `verification_id`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, '+201026036513', '$2y$10$ij.MbfsDgCiDiwC4QMHXdOSSGaTOLCgAstfDTYbQT3Z2K5LD8cndm', '2023-03-31 21:58:14', '2023-04-01 13:01:28', NULL);
+(1, '+201026036513', '$2y$10$d.MfTz0LA/6N1vQMbZgWW.POIDrk7CGprXdZqk6nES4qt/0Cj4JOa', '2023-03-31 21:58:14', '2023-04-01 22:24:00', NULL);
 
 --
 -- Indexes for dumped tables
@@ -709,25 +733,25 @@ ALTER TABLE `verifications`
 -- AUTO_INCREMENT for table `appointments`
 --
 ALTER TABLE `appointments`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `complaint`
 --
 ALTER TABLE `complaint`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `contacts`
 --
 ALTER TABLE `contacts`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `diagnose`
 --
 ALTER TABLE `diagnose`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `doctor_schedules`
@@ -745,7 +769,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `gallaries`
 --
 ALTER TABLE `gallaries`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -793,19 +817,19 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `schedules`
 --
 ALTER TABLE `schedules`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `specializations`
 --
 ALTER TABLE `specializations`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `verifications`
